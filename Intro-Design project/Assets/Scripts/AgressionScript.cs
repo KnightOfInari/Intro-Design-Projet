@@ -16,12 +16,14 @@ public class AgressionScript : MonoBehaviour
     private bool goBack = false;
     private int direction = -1;
 
+    Vector2 move;
     // Use this for initialization
     void Start()
     {
         //GMInstance = GameManager.gameManager;
         rb = gameObject.GetComponent<Rigidbody2D>();
         initialPosition = transform.position;
+        move = Vector2.zero;
     }
 
     IEnumerator SeekForTarget()
@@ -39,11 +41,11 @@ public class AgressionScript : MonoBehaviour
                     moving = true;
                     if (playerPosition.position.y - initialPosition.y < 0)
                     {
-                        direction = 2;
+                        move = new Vector2(0, -speed);
                     }
                     else if (playerPosition.position.y - initialPosition.y > 0)
                     {
-                        direction = 3;
+                        move = new Vector2(0, speed);
                     }
                 }
             }
@@ -52,9 +54,12 @@ public class AgressionScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-       if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
-            
+            Debug.Log("Bonked the player");
+            GameObject.FindObjectOfType<GameManager>().PlayerCanAnswer();
+
+            move = Vector2.zero;
         }
     }
 
@@ -64,16 +69,8 @@ public class AgressionScript : MonoBehaviour
 
         if (goBack == false)
         {
-            switch (direction)
-            {
-                
-                case 2:
-                    rb.velocity = new Vector2(0, -speed);
-                    break;
-                case 3:
-                    rb.velocity = new Vector2(0, speed);
-                    break;
-            }
+            rb.velocity = move;
+
         }
         else if (goBack)
         {

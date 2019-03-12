@@ -7,6 +7,9 @@ public class MoveScript : MonoBehaviour
     [SerializeField]
     private float speed = 1f;
 
+    [SerializeField]
+    private GameObject answerUI;
+
     private bool move;
     private Rigidbody2D rb;
     // Start is called before the first frame update
@@ -19,6 +22,11 @@ public class MoveScript : MonoBehaviour
     public void MovingAllowed(bool allowed)
     {
         move = allowed;
+    }
+
+    public void ShowUI(bool show)
+    {
+        answerUI.SetActive(show);
     }
 
     // Update is called once per frame

@@ -27,9 +27,16 @@ public class GameManager : MonoBehaviour
         Player.GetComponent<MoveScript>().MovingAllowed(false);
     }
 
+    public void PlayerCanAnswer()
+    {
+        Player.GetComponent<MoveScript>().ShowUI(true);
+    }
+
     public void UnblockPlayer()
     {
         Player.GetComponent<MoveScript>().MovingAllowed(true);
+        Player.GetComponent<MoveScript>().ShowUI(false);
+
     }
 
 
