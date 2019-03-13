@@ -12,9 +12,11 @@ public class MoveScript : MonoBehaviour
 
     private bool move;
     private Rigidbody2D rb;
+    Animator anim;
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponent<Animator>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         move = true;
     }
@@ -35,6 +37,11 @@ public class MoveScript : MonoBehaviour
         if (Input.GetKey(KeyCode.RightArrow) && move == true)
         {
             rb.velocity = transform.right * speed;
+            anim.SetBool("Walking", true);
+        }
+        if (Input.GetKeyUp(KeyCode.RightArrow) || move == false)
+        {
+            anim.SetBool("Walking", false);
         }
     }
 }

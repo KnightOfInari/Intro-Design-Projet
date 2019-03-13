@@ -16,6 +16,8 @@ public class AgressionScript : MonoBehaviour
     private bool goBack = false;
     private int direction = -1;
 
+    Animator anim;
+
     Vector2 move;
     // Use this for initialization
     void Start()
@@ -24,6 +26,7 @@ public class AgressionScript : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
         initialPosition = transform.position;
         move = Vector2.zero;
+        anim = GetComponent<Animator>();
     }
 
     IEnumerator SeekForTarget()
@@ -60,6 +63,8 @@ public class AgressionScript : MonoBehaviour
             GameObject.FindObjectOfType<GameManager>().PlayerCanAnswer();
 
             move = Vector2.zero;
+            anim.SetBool("Walking", false);
+
         }
     }
 
@@ -70,7 +75,8 @@ public class AgressionScript : MonoBehaviour
         if (goBack == false)
         {
             rb.velocity = move;
-
+            if (rb.velocity != Vector2.zero)
+                anim.SetBool("Walking", true);
         }
         else if (goBack)
         {
