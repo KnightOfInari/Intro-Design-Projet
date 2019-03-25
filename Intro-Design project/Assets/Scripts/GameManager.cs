@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject GameOverUI;
 
-
     private int MaxHealth = 10;
     private int CurrentHealth;
 
