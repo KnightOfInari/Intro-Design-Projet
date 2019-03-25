@@ -1,6 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.ImageEffects;
 
 public class AgressionScript : MonoBehaviour
 {
@@ -16,6 +16,11 @@ public class AgressionScript : MonoBehaviour
     private bool goBack = false;
     private int direction = -1;
 
+    public int nbEnnemies = 4;
+    private float saturationDegre = 1;
+    private float oldSaturation;
+    private Camera mainCamera;
+
     Animator anim;
 
     Vector2 move;
@@ -27,6 +32,8 @@ public class AgressionScript : MonoBehaviour
         initialPosition = transform.position;
         move = Vector2.zero;
         anim = GetComponent<Animator>();
+        saturationDegre = 1f / nbEnnemies;
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
     }
 
     IEnumerator SeekForTarget()
@@ -65,6 +72,8 @@ public class AgressionScript : MonoBehaviour
             move = Vector2.zero;
             anim.SetBool("Walking", false);
 
+            oldSaturation = mainCamera.GetComponent<ColorCorrectionCurves>().saturation;
+            mainCamera.GetComponent<ColorCorrectionCurves>().saturation = oldSaturation - saturationDegre;
         }
     }
 
@@ -88,4 +97,3 @@ public class AgressionScript : MonoBehaviour
         }
     }
 }
-
