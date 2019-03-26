@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager gameManager;
+    private static AudioManager audioManager;
 
     [SerializeField]
     private GameObject Player;
@@ -14,11 +17,17 @@ public class GameManager : MonoBehaviour
     private int MaxHealth = 10;
     private int CurrentHealth;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         CurrentHealth = MaxHealth;
         GameOverUI.SetActive(false);
+        audioManager = AudioManager.instance;
     }
 
     public void BlockPlayer()
@@ -38,6 +47,53 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void Play()
+    {
+        SceneManager.LoadScene(1);
+        if (audioManager != null)
+            StartSounds();
+        else
+        {
+            SearchAudio();
+        }
+    }
+
+    private void StartSounds()
+    {
+        if (audioManager != null)
+        {
+            audioManager.StopAllSounds();
+            audioManager.PlaySound("Level1");
+        }
+        else
+        {
+            Debug.LogWarning("GameManager doesn't have an audioManager");
+            InvokeRepeating("SearchAudio", 0f, 0.5f);
+        }
+
+    }
+
+    public void SearchAudio()
+    {
+        audioManager = FindObjectOfType<AudioManager>();
+        if (audioManager != null)
+        {
+            Debug.Log("audioManager found for game manager");
+            CancelInvoke();
+            StartSounds();
+        }
+    }
+
+    IEnumerator StopAllSounds()
+    {
+        yield return new WaitForSeconds(3);
+        AudioManager.instance.StopAllSounds();
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 
     public void DamagePlayer(int damage)
     {

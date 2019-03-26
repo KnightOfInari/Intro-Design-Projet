@@ -66,7 +66,6 @@ public class AgressionScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            Debug.Log("Bonked the player");
             GameObject.FindObjectOfType<GameManager>().PlayerCanAnswer();
 
             move = Vector2.zero;
