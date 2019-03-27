@@ -90,6 +90,13 @@ public class GameManager : MonoBehaviour
         AudioManager.instance.StopAllSounds();
     }
 
+    public void Retry()
+    {
+        CurrentHealth = MaxHealth;
+        GameOverUI.SetActive(false);
+        Play();
+    }
+
     public void Quit()
     {
         Application.Quit();
