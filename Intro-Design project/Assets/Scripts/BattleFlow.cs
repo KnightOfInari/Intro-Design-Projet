@@ -128,7 +128,9 @@ public class BattleFlow : MonoBehaviour
 				break;
 			case "Flee":
 				NarrativeText.GetComponent<Text>().text = "Vous changez d'avis et baissez la tête devant le méchant";
-				break;
+                GameObject.FindObjectOfType<GameManager>().ReturnFromFight();
+
+                break;
 			case "CallPolice":
 				NarrativeText.GetComponent<Text>().text = "Vous appelez la police";
 				break;

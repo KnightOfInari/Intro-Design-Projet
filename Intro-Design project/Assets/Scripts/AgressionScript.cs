@@ -24,6 +24,7 @@ public class AgressionScript : MonoBehaviour
     Animator anim;
 
     Vector2 move;
+    public bool aggression = true;
     // Use this for initialization
     void Start()
     {
@@ -67,7 +68,7 @@ public class AgressionScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            GameObject.FindObjectOfType<GameManager>().PlayerCanAnswer();
+            GameObject.FindObjectOfType<GameManager>().PlayerCanAnswer(gameObject.name);
             mainCamera = collision.gameObject.GetComponentInChildren<Camera>();
             move = Vector2.zero;
             anim.SetBool("Walking", false);
@@ -79,20 +80,23 @@ public class AgressionScript : MonoBehaviour
 
     private void Update()
     {
-        StartCoroutine(SeekForTarget());
+        if (aggression == true)
+        {
+            StartCoroutine(SeekForTarget());
 
-        if (goBack == false)
-        {
-            rb.velocity = move;
-            if (rb.velocity != Vector2.zero)
-                anim.SetBool("Walking", true);
-        }
-        else if (goBack)
-        {
-            rb.position = Vector3.MoveTowards(rb.position, initialPosition, speed * Time.deltaTime);
-            if (rb.position == initialPosition)
+            if (goBack == false)
             {
-                goBack = false;
+                rb.velocity = move;
+                if (rb.velocity != Vector2.zero)
+                    anim.SetBool("Walking", true);
+            }
+            else if (goBack)
+            {
+                rb.position = Vector3.MoveTowards(rb.position, initialPosition, speed * Time.deltaTime);
+                if (rb.position == initialPosition)
+                {
+                    goBack = false;
+                }
             }
         }
     }

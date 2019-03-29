@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     private int MaxHealth = 10;
     private int CurrentHealth;
 
+    private string badGuyToPacify;
+
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -36,8 +38,9 @@ public class GameManager : MonoBehaviour
         Player.GetComponent<MoveScript>().MovingAllowed(false);
     }
 
-    public void PlayerCanAnswer()
+    public void PlayerCanAnswer(string badGuyName)
     {
+        badGuyToPacify = badGuyName;
         Player.GetComponent<MoveScript>().ShowUI(true);
     }
 
@@ -63,7 +66,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator SpawnPlayerAtPosition()
     {
         yield return new WaitForSeconds(1);
-
+        GameObject.Find(badGuyToPacify).GetComponent<AgressionScript>().aggression = false;
         Player = Instantiate(playerPrefab, PlayerPosition, Quaternion.identity);
 
     }
@@ -83,6 +86,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator PlayerFirstSpawn()
     {
         yield return new WaitForSeconds(1);
+
         Player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
     }
 
@@ -149,10 +153,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.DownArrow)) //section pour tester le gameOver
-        {
-            GameOver();
-        }
         if (Player == null)
         {
             Debug.LogWarning("No player found");
