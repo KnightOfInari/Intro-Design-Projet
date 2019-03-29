@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     private GameObject Player;
     [SerializeField]
     private GameObject GameOverUI;
-
+    private Vector3 PlayerPosition;
     private int MaxHealth = 10;
     private int CurrentHealth;
 
@@ -45,6 +45,26 @@ public class GameManager : MonoBehaviour
     {
         Player.GetComponent<MoveScript>().MovingAllowed(true);
         Player.GetComponent<MoveScript>().ShowUI(false);
+
+    }
+
+    public void PlayerFight(Vector3 playerPosition)
+    {
+        PlayerPosition = playerPosition;
+        SceneManager.LoadSceneAsync(2);
+    }
+
+    public void ReturnFromFight()
+    {
+        SceneManager.LoadSceneAsync(1);
+        StartCoroutine(SpawnPlayerAtPosition());
+    }
+
+    private IEnumerator SpawnPlayerAtPosition()
+    {
+        yield return new WaitForSeconds(1);
+
+        Player = Instantiate(playerPrefab, PlayerPosition, Quaternion.identity);
 
     }
 

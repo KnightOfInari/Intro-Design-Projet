@@ -8,8 +8,10 @@ public class AnswerUI : MonoBehaviour
     {
         if (fightBack == true)
         {
+
             //TODO systeme de combat
-            GameObject.FindObjectOfType<GameManager>().UnblockPlayer(); //temporaire pour test
+            GameObject.FindObjectOfType<GameManager>().PlayerFight(gameObject.GetComponentInParent<Transform>().position);
+            //GameObject.FindObjectOfType<GameManager>().UnblockPlayer(); //temporaire pour test
         }
         else
         {
