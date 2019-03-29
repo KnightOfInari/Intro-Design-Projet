@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     private static AudioManager audioManager;
 
     [SerializeField]
+    private GameObject playerPrefab;
     private GameObject Player;
     [SerializeField]
     private GameObject GameOverUI;
@@ -56,6 +57,13 @@ public class GameManager : MonoBehaviour
         {
             SearchAudio();
         }
+        StartCoroutine(PlayerFirstSpawn());
+    }
+
+    private IEnumerator PlayerFirstSpawn()
+    {
+        yield return new WaitForSeconds(1);
+        Player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
     }
 
     private void StartSounds()

@@ -33,7 +33,8 @@ public class AgressionScript : MonoBehaviour
         move = Vector2.zero;
         anim = GetComponent<Animator>();
         saturationDegre = 1f / nbEnnemies;
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+
+        //mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
     }
 
     IEnumerator SeekForTarget()
@@ -67,7 +68,7 @@ public class AgressionScript : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             GameObject.FindObjectOfType<GameManager>().PlayerCanAnswer();
-
+            mainCamera = collision.gameObject.GetComponentInChildren<Camera>();
             move = Vector2.zero;
             anim.SetBool("Walking", false);
 
