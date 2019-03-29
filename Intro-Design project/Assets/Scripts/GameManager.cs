@@ -78,6 +78,12 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void EndGame()
+    {
+        SceneManager.LoadScene(3);
+        StopAllSounds();
+    }
+
     public void Play()
     {
         SceneManager.LoadScene(1);
