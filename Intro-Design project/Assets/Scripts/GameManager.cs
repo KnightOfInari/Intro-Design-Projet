@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityStandardAssets.ImageEffects;
 
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager gameManager;
     private static AudioManager audioManager;
+
+    private ColorCorrectionCurves colorCorrection;
 
     [SerializeField]
     private GameObject playerPrefab;
@@ -38,8 +41,9 @@ public class GameManager : MonoBehaviour
         Player.GetComponent<MoveScript>().MovingAllowed(false);
     }
 
-    public void PlayerCanAnswer(string badGuyName)
+    public void PlayerCanAnswer(string badGuyName, ColorCorrectionCurves curves)
     {
+        colorCorrection = curves;
         badGuyToPacify = badGuyName;
         Player.GetComponent<MoveScript>().ShowUI(true);
     }
@@ -68,6 +72,8 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1);
         GameObject.Find(badGuyToPacify).GetComponent<AgressionScript>().aggression = false;
         Player = Instantiate(playerPrefab, PlayerPosition, Quaternion.identity);
+        Camera mainCamera = Player.GetComponentInChildren<Camera>();
+        mainCamera.GetComponent<ColorCorrectionCurves>().saturation = colorCorrection.saturation;
 
     }
 

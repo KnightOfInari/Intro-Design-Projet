@@ -68,13 +68,14 @@ public class AgressionScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            GameObject.FindObjectOfType<GameManager>().PlayerCanAnswer(gameObject.name);
             mainCamera = collision.gameObject.GetComponentInChildren<Camera>();
             move = Vector2.zero;
             anim.SetBool("Walking", false);
 
             oldSaturation = mainCamera.GetComponent<ColorCorrectionCurves>().saturation;
             mainCamera.GetComponent<ColorCorrectionCurves>().saturation = oldSaturation - saturationDegre;
+            GameObject.FindObjectOfType<GameManager>().PlayerCanAnswer(gameObject.name, mainCamera.GetComponent<ColorCorrectionCurves>());
+
         }
     }
 
