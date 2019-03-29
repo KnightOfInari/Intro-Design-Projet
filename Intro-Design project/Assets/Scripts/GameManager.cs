@@ -148,12 +148,10 @@ public class GameManager : MonoBehaviour
             GameOver();
         }
     }
-
-    void GameOver()
+	
+    public void GameOver()
     {
-        GameOverUI.SetActive(true);
-        BlockPlayer();
-        Time.timeScale = 0; // stop toutes les actions basees sur le temps. Plus ou moins une pause
+        GameOverUI.SetActive(true);   
     }
 
     // Update is called once per frame

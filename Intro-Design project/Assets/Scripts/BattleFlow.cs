@@ -23,15 +23,13 @@ public class BattleFlow : MonoBehaviour
 	private float newHP;
 	//
 	// TODO
-	//     	Add correct text
 	//		Add sprites
-	//		Add transitions
-	//		Add animations
 	//
 	
 	void Start()
 	{
 		Narrative.SetActive(false);
+		PlayerHPBar.gameObject.transform.localScale = new Vector3(userHP,1f);
 	}
 	
 	void ReduceUserLife()
@@ -41,7 +39,9 @@ public class BattleFlow : MonoBehaviour
 			PlayerHPBar.gameObject.transform.localScale = new Vector3(userHP,1f);
 		}
 		if (userHP <= 0) {
-			Debug.Log("game over");
+			GameObject.FindObjectOfType<GameManager>().GameOver();
+			userHP = 1;
+			oppHP = 1;
 			CancelInvoke();
 			//TODO Add game over call
 		}
@@ -51,8 +51,6 @@ public class BattleFlow : MonoBehaviour
 	
 	void ReduceOpponentLife()
 	{
-		Debug.Log("OPP HP : " + oppHP);
-		Debug.Log("NEW HP : " + newHP);
 		if (oppHP > newHP) {
 			oppHP -= .01f;
 			OpponentHPBar.gameObject.transform.localScale = new Vector3(oppHP,1f);
@@ -64,7 +62,7 @@ public class BattleFlow : MonoBehaviour
 	
     void Update()
     {
-		if ((battleState == 3 || battleState == 5) && Input.GetKeyDown(KeyCode.Space)) {
+		if ((battleState == 3 || battleState == 5) && Input.GetMouseButtonDown(0)) {
 			battleState ++;
 		}
 		if (battleState == 1) {
@@ -88,21 +86,17 @@ public class BattleFlow : MonoBehaviour
 	private void OpponentAnswer() {
 		switch (lastAction) {
 			case "Hit":
-				NarrativeText.GetComponent<Text>().text = "Le méchant vous tape plus fort";
+				NarrativeText.GetComponent<Text>().text = "The bad guy hits you harder !";
 				newHP = userHP - 0.8f;
 				InvokeRepeating("ReduceUserLife", 0.1f, 0.1f);
 				break;
 			case "Insult":
-				NarrativeText.GetComponent<Text>().text = "Le méchant vous insulte plus fort";
+				NarrativeText.GetComponent<Text>().text = "The bad guy teaches you new things about your mother";
 				newHP = userHP - 0.3f;
 				InvokeRepeating("ReduceUserLife", 0.1f, 0.1f);
 				break;
-			case "Flee":
-				NarrativeText.GetComponent<Text>().text = "Le méchant vous regarde en ricannant";
-				//TODO : add changement de scène
-				break;
 			case "CallPolice":
-				NarrativeText.GetComponent<Text>().text = "Le méchant vous fait une clé de bras et raccroche votre téléphone";
+				NarrativeText.GetComponent<Text>().text = "The bad guy hits you and hang out your phone";
 				newHP = userHP - 0.5f;
 				break;
 			default:
@@ -117,22 +111,22 @@ public class BattleFlow : MonoBehaviour
 		Debug.Log("called");
 		switch (lastAction) {
 			case "Hit":
-				NarrativeText.GetComponent<Text>().text = "Vous tapez le méchant";
+				NarrativeText.GetComponent<Text>().text = "You hit the bad guy";
 				newHP = oppHP - 0.05f;
 				InvokeRepeating("ReduceOpponentLife", 0.1f, 0.3f);
 				break;
 			case "Insult":
-				NarrativeText.GetComponent<Text>().text = "Vous insultez le méchant";
+				NarrativeText.GetComponent<Text>().text = "You insult the bad guy";
 				newHP = oppHP - 0.05f;
 				InvokeRepeating("ReduceOpponentLife", 0.1f, 0.3f);
 				break;
 			case "Flee":
-				NarrativeText.GetComponent<Text>().text = "Vous changez d'avis et baissez la tête devant le méchant";
-                GameObject.FindObjectOfType<GameManager>().ReturnFromFight();
-
+				NarrativeText.GetComponent<Text>().text = "You change your mind and lower your head";
+                oppHP = 1;
+				GameObject.FindObjectOfType<GameManager>().ReturnFromFight();
                 break;
 			case "CallPolice":
-				NarrativeText.GetComponent<Text>().text = "Vous appelez la police";
+				NarrativeText.GetComponent<Text>().text = "You try to call the police";
 				break;
 			default:
 				Debug.Log("Error 404");
