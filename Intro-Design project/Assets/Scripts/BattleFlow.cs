@@ -96,7 +96,7 @@ public class BattleFlow : MonoBehaviour
 				InvokeRepeating("ReduceUserLife", 0.1f, 0.1f);
 				break;
 			case "CallPolice":
-				NarrativeText.GetComponent<Text>().text = "The bad guy hits you and hang out your phone";
+				NarrativeText.GetComponent<Text>().text = "The bad guy hits you and hang up your phone";
 				newHP = userHP - 0.5f;
 				break;
 			default:

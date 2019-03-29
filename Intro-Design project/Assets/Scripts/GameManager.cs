@@ -74,6 +74,7 @@ public class GameManager : MonoBehaviour
         Player = Instantiate(playerPrefab, PlayerPosition, Quaternion.identity);
         Camera mainCamera = Player.GetComponentInChildren<Camera>();
         mainCamera.GetComponent<ColorCorrectionCurves>().saturation = colorCorrection.saturation;
+        UnblockPlayer();
 
     }
 
