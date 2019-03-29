@@ -20,6 +20,9 @@ public class AgressionScript : MonoBehaviour
     private float saturationDegre = 1;
     private float oldSaturation;
     private Camera mainCamera;
+    private Canvas myCanvas;
+    [SerializeField]
+    GameObject textActive;
 
     Animator anim;
 
@@ -75,8 +78,19 @@ public class AgressionScript : MonoBehaviour
             oldSaturation = mainCamera.GetComponent<ColorCorrectionCurves>().saturation;
             mainCamera.GetComponent<ColorCorrectionCurves>().saturation = oldSaturation - saturationDegre;
             GameObject.FindObjectOfType<GameManager>().PlayerCanAnswer(gameObject.name, mainCamera.GetComponent<ColorCorrectionCurves>());
+            // GetComponentInChildren<Canvas>().GetComponent<GameObject>().SetActive(false);
+            // myCanvas = GetComponentInChildren<Canvas>();
+            // GameObject textActive = myCanvas.GetComponent<GameObject>();
+            textActive.SetActive(true);
+            StartCoroutine(Delay());
 
         }
+    }
+
+    private IEnumerator Delay ()
+    {
+        yield return new WaitForSeconds(2);
+        textActive.SetActive(false);
     }
 
     private void Update()
