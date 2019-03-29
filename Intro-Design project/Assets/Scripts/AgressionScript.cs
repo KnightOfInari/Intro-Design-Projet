@@ -16,7 +16,7 @@ public class AgressionScript : MonoBehaviour
     private bool goBack = false;
     private int direction = -1;
 
-    public int nbEnnemies = 20;
+    private int nbEnnemies = 20;
     private float saturationDegre = 1;
     private float oldSaturation;
     private Camera mainCamera;
