@@ -207,7 +207,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: QUIT
+  m_Text: That's enough ...
 --- !u!1 &630165892
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,7 +286,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: RETRY
+  m_Text: Let's go !
 --- !u!1 &987582446
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,9 +365,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Sometimes there is just nothing you can do but keep your head down.
-
-    Do you want to retry knowing this ?'
+  m_Text: It's harassment, they do not have the right. Do not let them go!
 --- !u!1 &1764097340
 GameObject:
   m_ObjectHideFlags: 0
