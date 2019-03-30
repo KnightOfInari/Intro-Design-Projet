@@ -108,7 +108,6 @@ public class BattleFlow : MonoBehaviour
 		
 	private void doAction()
 	{
-		Debug.Log("called");
 		switch (lastAction) {
 			case "Hit":
 				NarrativeText.GetComponent<Text>().text = "You hit the bad guy";

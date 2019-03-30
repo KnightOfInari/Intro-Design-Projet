@@ -58,12 +58,12 @@ public class GameManager : MonoBehaviour
     public void PlayerFight(Vector3 playerPosition)
     {
         PlayerPosition = playerPosition;
-        SceneManager.LoadSceneAsync(2);
+        SceneManager.LoadScene(2);
     }
 
     public void ReturnFromFight()
     {
-        SceneManager.LoadSceneAsync(1);
+        SceneManager.LoadScene(1);
         StartCoroutine(SpawnPlayerAtPosition());
     }
 
@@ -75,7 +75,6 @@ public class GameManager : MonoBehaviour
         Camera mainCamera = Player.GetComponentInChildren<Camera>();
         mainCamera.GetComponent<ColorCorrectionCurves>().saturation = colorCorrection.saturation;
         UnblockPlayer();
-
     }
 
     public void EndGame()
@@ -164,9 +163,13 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            GameOver();
+        }
+
         if (Player == null)
         {
-            Debug.LogWarning("No player found");
             Player = GameObject.FindGameObjectWithTag("Player");
         }
     }

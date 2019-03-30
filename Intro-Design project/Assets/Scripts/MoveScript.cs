@@ -16,6 +16,7 @@ public class MoveScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         anim = GetComponent<Animator>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         move = true;
