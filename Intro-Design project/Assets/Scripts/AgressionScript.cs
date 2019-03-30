@@ -22,7 +22,7 @@ public class AgressionScript : MonoBehaviour
     private Camera mainCamera;
     private Canvas myCanvas;
     [SerializeField]
-    GameObject textActive;
+    GameObject textActive = null;
 
     Animator anim;
 

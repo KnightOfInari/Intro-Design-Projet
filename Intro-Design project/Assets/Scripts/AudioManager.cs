@@ -61,7 +61,7 @@ public class AudioManager : MonoBehaviour
     private static bool audioManagerExists;
 
     [SerializeField]
-    private Sound[] sounds; // array of sounds
+    private Sound[] sounds = null; // array of sounds
 
     public static AudioManager instance;
 

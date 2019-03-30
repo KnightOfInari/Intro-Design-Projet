@@ -11,15 +11,15 @@ public class BattleFlow : MonoBehaviour
 	private float oppHP = 1;
 	private string lastAction = null;
 	[SerializeField]
-    private GameObject Menu;
+    private GameObject Menu = null;
 	[SerializeField]
-    private GameObject PlayerHPBar;
+    private GameObject PlayerHPBar = null;
 	[SerializeField]
-    private GameObject OpponentHPBar;
+    private GameObject OpponentHPBar = null;
 	[SerializeField]
-    private GameObject Narrative;
+    private GameObject Narrative = null;
 	[SerializeField]
-    private GameObject NarrativeText;
+    private GameObject NarrativeText = null;
 	private float newHP;
 	//
 	// TODO

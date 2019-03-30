@@ -8,7 +8,7 @@ public class MoveScript : MonoBehaviour
     private float speed = 1f;
 
     [SerializeField]
-    private GameObject answerUI;
+    private GameObject answerUI = null;
 
     private bool move;
     private Rigidbody2D rb;

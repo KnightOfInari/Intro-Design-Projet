@@ -13,10 +13,10 @@ public class GameManager : MonoBehaviour
     private ColorCorrectionCurves colorCorrection;
 
     [SerializeField]
-    private GameObject playerPrefab;
+    private GameObject playerPrefab = null;
     private GameObject Player;
     [SerializeField]
-    private GameObject GameOverUI;
+    private GameObject GameOverUI = null;
     private Vector3 PlayerPosition;
     private int MaxHealth = 10;
     private int CurrentHealth;
