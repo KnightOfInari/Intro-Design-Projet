@@ -25,6 +25,7 @@ public class MoveScript : MonoBehaviour
     public void MovingAllowed(bool allowed)
     {
         move = allowed;
+        Debug.Log("the player can move ?" + move.ToString());
     }
 
     public void ShowUI(bool show)

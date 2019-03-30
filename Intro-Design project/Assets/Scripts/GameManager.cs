@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator SpawnPlayerAtPosition()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1f);
         GameObject.Find(badGuyToPacify).GetComponent<AgressionScript>().aggression = false;
         Player = Instantiate(playerPrefab, PlayerPosition, Quaternion.identity);
         Camera mainCamera = Player.GetComponentInChildren<Camera>();
@@ -154,10 +154,14 @@ public class GameManager : MonoBehaviour
             GameOver();
         }
     }
-	
+
     public void GameOver()
     {
-        GameOverUI.SetActive(true);   
+        if (GameOverUI.activeSelf == false)
+            GameOverUI.SetActive(true);
+        else
+            GameOverUI.SetActive(false);
+
     }
 
     // Update is called once per frame
